@@ -1,0 +1,25 @@
+{
+  "name": "node-info-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charliebarger/node-info-site.git"
+  },
+  "keywords": [],
+  "author": "Charles Barger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charliebarger/node-info-site/issues"
+  },
+  "homepage": "https://github.com/charliebarger/node-info-site#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
