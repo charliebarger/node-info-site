@@ -1,40 +1,29 @@
 import path from "path";
 import http from "http";
 import fs from "fs";
-
+import express from "express";
 import { fileURLToPath } from "url";
+const app = express();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const server = http.createServer((req, res) => {
-  let test = path.join(
-    __dirname,
-    "public",
-    req.url === "/" ? "index.html" : req.url + ".html"
-  );
-  res.writeHead(200, { "Content-Type": "text/html" });
-  fs.readFile(test, (err, content) => {
-    if (err) {
-      if (err.code == "ENOENT") {
-        fs.readFile(
-          path.join(__dirname, "public", "404.html"),
-          (err, content) => {
-            if (err) {
-              res.end("Error");
-            } else {
-              res.end(content);
-            }
-          }
-        );
-      } else {
-        res.end("Error");
-      }
-    } else {
-      res.end(content, "utf-8");
-    }
-  });
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', "index.html"))
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', "about.html"))
+});
+
+app.get("/contact-me", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', "contact-me.html"))
+});
+
+app.use(function(req, res) {
+    res.status(404).sendFile(path.join(__dirname, 'public', "404.html"));
 });
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT);
+app.listen(PORT);
